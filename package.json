@@ -13,6 +13,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.3",
-    "nodemon": "^1.11.0"
+    "ffprobe": "^1.1.0",
+    "nodemon": "^1.11.0",
+    "video-metadata-thumbnails": "^1.0.17",
+    "video-thumbnail-generator": "^1.1.3"
   }
 }

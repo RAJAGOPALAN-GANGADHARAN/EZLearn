@@ -1,10 +1,78 @@
 <html>
   <head>
-    <title>Video stream sample</title>
+    <title>EZLearn</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+      <style>
+        .stc{
+          padding:20px;
+        }
+      </style>
+    <script>
+      window.onload=(ev)=>{
+
+        fetch("http://localhost:3000/list") // Call the fetch function passing the url of the API as a parameter
+          .then(response => response.json())
+          .then(data => {
+            
+            var c = document.getElementById("course");
+            for (var key in data) {
+              if (!data.hasOwnProperty(key)) { continue; }
+              var img = "thumbnail/" + data[key];
+              var uri = "courseplay.html?dc=" + key;
+              var script = `<div class='stc'><div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="${img}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">${key}</p>
+                <a href="${uri}" class="btn btn-primary">Watch</a>
+              </div>
+            </div></div>`;
+              c.innerHTML+=script;
+            }
+          })
+          .catch((error)=>{
+            console.log(error);
+          });
+      };
+
+    </script>
   </head>
   <body>
-    <video id="videoPlayer" controls muted="muted" autoplay> 
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="http://localhost:3000/">EZLearn</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="http://localhost:3000/">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    
+
+    <div id="course" style="display: grid;grid-auto-flow: column;"></div>
+    <!-- <video id="videoPlayer" controls muted="muted" autoplay> 
       <source src="http://localhost:3000/video" type="video/mp4">
-    </video>
+    </video> -->
   </body>
 </html>
