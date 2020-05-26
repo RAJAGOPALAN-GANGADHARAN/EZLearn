@@ -51,6 +51,12 @@
                         console.log(error);
                     });
             }
+        function setOkStaus(){
+            document.getElementById('status').innerText = "Ok good";
+            var el = document.getElementById('status');
+            el.style.borderColor = "#73AD21";
+            el.style.color = "#73AD21";
+        }
         function getParameterByName(name, url) {
                 if (!url) url = window.location.href;
                 name = name.replace(/[\[\]]/g, "\\$&");
@@ -98,11 +104,12 @@
 
 
     <div id="course"></div>
-    <video id="videoPlayer" controls muted="muted" autoplay> 
+    <div id="status" style="font-size:xx-large;position:absolute;top:350px;right:50px;margin:5px;border-radius: 2px;color:#73AD21;border: 2px solid #73AD21;">Ok good</div>
+    <video id="videoPlayer" controls onclick="setOkStaus();" autoplay> 
       <source type="video/mp4">
-    <canvas class="canvas" id="cv1"></canvas>
+    <canvas class="canvas" id="cv1">
+    </canvas>
     </video>
-    
     <script src="poseNet_webcam.js"></script>
     <div id="comments" style="padding-top: 50px;">
         <div class="row d-flex justify-content-center mt-100 mb-100">
